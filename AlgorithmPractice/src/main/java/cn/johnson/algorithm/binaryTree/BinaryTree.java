@@ -91,7 +91,7 @@ public class BinaryTree<T> {
 
 		while (root != null || !stack.isEmpty()) {
 			while (root != null) {
-				System.err.print(root.getData());
+				System.out.print(root.getData());
 				stack.push(root);
 				root = root.getLefNode();
 			}
@@ -102,22 +102,27 @@ public class BinaryTree<T> {
 
 
 	}
-	public void afterOrderTraverseWithStack(TreeNode<T> root) {
+	public void postOrderTraverseWithStack(TreeNode<T> root) {
 		
 		Stack<TreeNode<T>> stack = new ResizableStackImpl<TreeNode<T>>();
+		Stack<TreeNode<T>> stack2 = new ResizableStackImpl<TreeNode<T>>();
+		stack.push(root);
 		
-		while (root != null || !stack.isEmpty()) {
-			while (root != null) {
-				stack.push(root);
-				root = root.getLefNode();
+		TreeNode<T> node=null;
+		while (!stack.isEmpty()) {
+			node=stack.pop();
+			stack2.push(node);
+			if(null!=node.getLefNode()){
+				stack.push(node.getLefNode());
 			}
-			
-			root = stack.pop();
-			root = root.getRightNode();
-			System.err.print(root.getData());
+			if(null!=node.getRightNode()){
+				stack.push(node.getRightNode());
+			}
 		}
 		
-		
+		while (!stack2.isEmpty()) {
+			System.out.print(stack2.pop().getData());
+		}
 	}
 
 	public void middleOrderTraverseWithStack(TreeNode<T> root) {
@@ -130,7 +135,7 @@ public class BinaryTree<T> {
 			}
 
 			root = stack.pop();
-			System.err.print(root.getData());
+			System.out.print(root.getData());
 			root = root.getRightNode();
 		}
 
@@ -155,9 +160,8 @@ public class BinaryTree<T> {
 		System.out.println();
 		tree.preOrderTraverseWithStack(tree.getRootNode());
 		System.out.println("----");
-		System.out.println("----");
 		tree.middleOrderTraverseWithStack(tree.getRootNode());
-		System.out.println();
-//		tree.afterOrderTraverseWithStack(tree.getRootNode());
+		System.out.println("------");
+		tree.postOrderTraverseWithStack(tree.getRootNode());
 	}
 }

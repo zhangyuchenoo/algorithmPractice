@@ -50,7 +50,6 @@ public class ReversePoland {
 						}
 						// 如果栈顶操作符优先级等于当前操作符 则将栈顶操作符先出栈 并将当前操作符入栈
 					}
-
 				}
 
 			} else if (c == '\r') {
